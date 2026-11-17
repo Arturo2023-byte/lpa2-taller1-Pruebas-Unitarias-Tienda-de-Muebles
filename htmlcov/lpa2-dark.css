@@ -1,0 +1,124 @@
+/* ================================================================
+   LPA2 | TEMA TECNOLOGICO OSCURO
+   Archivo: lpa2-dark.css
+   Solo modifica la apariencia del reporte. No altera los resultados.
+   Bootstrap 5.3.6 se carga antes del CSS nativo de coverage.py.
+   ================================================================ */
+
+/* 01. Identidad visual: variables reutilizables para colores y bordes.
+   Se agrupan aqui para facilitar cambios futuros sin buscar estilos. */
+:root {
+  --lpa-bg: #080f1f;             /* Fondo general de azul noche. */
+  --lpa-panel: #111e33;          /* Fondo de paneles y de tarjetas. */
+  --lpa-panel-2: #14243b;        /* Variante mas clara para hover y tablas. */
+  --lpa-border: #2a3d56;        /* Bordes tenues para separar secciones. */
+  --lpa-text: #e8f1fb;          /* Texto principal de alto contraste. */
+  --lpa-muted: #9bb0ca;         /* Descripciones y metadatos secundarios. */
+  --lpa-accent: #37e0cd;        /* Acento turquesa. */
+  --lpa-accent-blue: #74acff;   /* Segundo acento para enlaces. */
+  --lpa-good: #65dfaa;          /* Color positivo de cobertura. */
+  --lpa-danger: #ff8197;        /* Advertencias y filas sin cubrir. */
+}
+
+/* 02. Base general: forzamos el modo oscuro sin depender del sistema.
+   El fondo con gradientes da profundidad sin utilizar imagenes externas. */
+html { color-scheme: dark; }
+body {
+  background: radial-gradient(circle at 95% 0%, #133654 0, transparent 34%), var(--lpa-bg) !important;
+  color: var(--lpa-text) !important;
+  min-height: 100vh;
+  font-family: Inter, "Segoe UI", system-ui, sans-serif;
+}
+a { color: var(--lpa-accent-blue); }
+a:hover { color: var(--lpa-accent); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--lpa-accent) !important; outline-offset: 3px; }
+
+/* 03. Cabecera original: se conserva su estructura y sus controles.
+   No se renombran los ids usados por el JavaScript de coverage.py. */
+body > header {
+  background: rgba(10, 20, 38, .97) !important;
+  border-bottom: 1px solid var(--lpa-border) !important;
+  box-shadow: 0 12px 35px rgba(0,0,0,.17);
+}
+body > header .content { padding: 1.1rem clamp(1rem, 4vw, 3.5rem); }
+body > header h1 { font-size: clamp(1.15rem, 2vw, 1.65rem); font-weight: 750; letter-spacing: -.02em; color: #fff; }
+body > header h1 .pc_cov { color: var(--lpa-accent); }
+body > header h2 { margin-top: .8rem; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+body > header h2 a.button, body > header h2 a.button.current {
+  border: 1px solid var(--lpa-border) !important;
+  color: var(--lpa-text) !important;
+  background: var(--lpa-panel) !important;
+  border-radius: 10px !important;
+  padding: .42rem .8rem !important;
+  text-decoration: none !important;
+  font-style: normal;
+  font-weight: 600;
+}
+body > header h2 a.button:hover { border-color: var(--lpa-accent) !important; background: #183750 !important; }
+body > header h2 a.current { border-color: var(--lpa-accent) !important; color: var(--lpa-accent) !important; }
+body > header p.text, footer .content { color: var(--lpa-muted) !important; }
+body > header #filter_container #filter {
+  width: min(260px, 55vw);
+  padding: .55rem .85rem;
+  background: #0d1a2d !important;
+  border: 1px solid var(--lpa-border) !important;
+  color: var(--lpa-text) !important;
+  border-radius: 9px;
+}
+body > header #filter_container label { color: var(--lpa-muted); }
+body > header #help_panel { background: var(--lpa-panel) !important; color: var(--lpa-text) !important; border: 1px solid var(--lpa-border); }
+body > header.sticky .content { padding-top: .4rem; padding-bottom: .4rem; }
+
+/* 04. Resumen visual: solo se inserta en los tres indices principales.
+   Las clases card, row, col y progress aprovechan Bootstrap local. */
+.lpa-overview { max-width: 1320px; padding: 1.75rem clamp(1rem, 4vw, 3.5rem) 1.3rem; margin: 0 auto; }
+.lpa-eyebrow { color: var(--lpa-accent); font-size: .74rem; letter-spacing: .19em; font-weight: 800; text-transform: uppercase; }
+.lpa-heading { color: #fff; font-size: clamp(1.4rem, 3vw, 2.1rem); font-weight: 750; letter-spacing: -.025em; margin: .45rem 0; }
+.lpa-description { color: var(--lpa-muted); font-size: .93rem; max-width: 780px; line-height: 1.6; margin: 0 0 1.2rem; }
+.lpa-stat.card { border-radius: 17px; border: 1px solid var(--lpa-border); background: linear-gradient(145deg, var(--lpa-panel), #10243b); min-height: 156px; box-shadow: 0 14px 28px rgba(0,0,0,.13); }
+.lpa-stat .card-body { padding: 1.3rem 1.35rem; }
+.lpa-stat-label { display: block; font-size: .78rem; font-weight: 650; color: var(--lpa-muted); margin-bottom: .75rem; }
+.lpa-stat-value { color: var(--lpa-text); font-size: clamp(1.6rem, 2.7vw, 2.25rem); line-height: 1.1; font-weight: 800; }
+.lpa-stat-value.accent { color: var(--lpa-accent); }
+.lpa-stat-note { display: block; margin-top: .6rem; font-size: .72rem; color: var(--lpa-muted); }
+.lpa-stat .progress { height: 7px; background: #30415b; border-radius: 99px; margin-top: .95rem; }
+.lpa-stat .progress-bar { background: linear-gradient(90deg, #36d1bb, #73aaff); border-radius: 99px; }
+.lpa-info { background: rgba(55,224,205,.07); color: #c7d7eb; padding: .8rem 1rem; border: 1px solid rgba(55,224,205,.22); border-radius: 12px; font-size: .83rem; line-height: 1.5; }
+.lpa-info strong { color: var(--lpa-accent); }
+
+/* 05. Tabla original: se estiliza sin tocar filas, valores o atributos.
+   Los elementos data-sortable, data-ratio y aria-sort permanecen intactos. */
+#index { margin: 1rem clamp(1rem, 4vw, 3.5rem) 2rem !important; padding: 0; overflow-x: auto; border: 1px solid var(--lpa-border); border-radius: 16px; background: var(--lpa-panel); }
+#index table.index { width: 100%; min-width: 840px; margin-left: 0; border-collapse: separate; border-spacing: 0; }
+#index td, #index th { padding: .72rem .65rem; border-bottom: 1px solid var(--lpa-border); color: var(--lpa-text); }
+#index td.name, #index th.name { min-width: 9rem; }
+#index td.name a, #index td a { color: var(--lpa-accent-blue); text-decoration: none; }
+#index td.name a:hover, #index td a:hover { color: var(--lpa-accent); text-decoration: underline; }
+#index thead th, #index tr.tablehead th { background: #172a43 !important; color: #b9d2ec !important; border-color: var(--lpa-border); font-weight: 650; }
+#index tr.tablehead th:hover, #index th[aria-sort="ascending"], #index th[aria-sort="descending"] { background: #25405f !important; color: #fff !important; }
+#index tbody tr:hover td { background: #1c344c !important; }
+#index tr.total td { background: #143a41 !important; color: #c8fff1 !important; font-weight: 800; }
+#index td[data-ratio] { font-weight: 680; font-variant-numeric: tabular-nums; }
+#index td.spacer, #index th.spacer { background: transparent !important; }
+#index #no_rows { color: var(--lpa-muted); padding: 1rem; }
+
+/* 06. Detalle por archivo: el resaltado de cobertura sigue visible.
+   Solo se cambia la superficie del codigo, no su sintaxis ni numeracion. */
+#source { color: var(--lpa-text); }
+#source pre, #source table { color: var(--lpa-text); }
+#source .run { background-color: rgba(60,180,125,.11) !important; }
+#source .mis { background-color: rgba(255,105,124,.19) !important; }
+#source .par { background-color: rgba(250,202,86,.14) !important; }
+#source .exc { background-color: rgba(130,150,176,.14) !important; }
+#source a { color: var(--lpa-accent-blue); }
+footer { border-top: 1px solid var(--lpa-border); padding-top: 1rem; }
+
+/* 07. Adaptacion a moviles: el contenido no se corta en pantallas chicas. */
+@media (max-width: 760px) {
+  body > header .content { padding: .9rem 1rem; }
+  #filter_container { float: none; margin: .75rem 0; }
+  #filter_container #filter { width: 80vw; }
+  #index { margin: 1rem .75rem 2rem !important; }
+  .lpa-overview { padding: 1.2rem .75rem; }
+  footer { margin: 1rem; }
+}
